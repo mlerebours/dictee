@@ -1,0 +1,53 @@
+<div ng-controller="DicteeCtrl as dictee">
+
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h1 class="text-center">Dictée de Baptiste {{dictee.total2}}</h1>
+        </div>
+    </div>
+    <div class="jumbotron" ng-show="dictee.total === 5">
+        <div class="text-center">
+            <h1>Terminé</h1>
+            <h2>Tu as eu {{dictee.points}} bonnes réponses sur {{dictee.total}}</h2>
+            <button type="button" class="btn btn-info" ng-click="dictee.restart()">Recommencer ?</button>
+        </div>
+    </div>
+    <form name="answerForm" ng-hide="dictee.total === 5" ng-submit="dictee.checkAnswer(dictee.question.answer)">
+        <div class="row">
+            <div class="col-xs-1">
+                <img src="../images/Sound.ico" width="40" ng-click="dictee.readWord()">
+            </div>
+            <div class="col-xs-11">
+                <h2 class="text-right">{{dictee.points}} /
+                    <small>{{dictee.total}} points ({{dictee.total2}} remaining)</small>
+                    <small>({{dictee.total2}} remaining)</small>
+                </h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="response">Réponse:</label>
+                    <input type="text" class="form-control" ng-model="dictee.question.answer" id="response">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8">
+                <blockquote>
+                    {{dictee.question.answer | uppercase}}
+                </blockquote>
+            </div>
+            <div class="col-xs-4">
+                <div class="text-right">
+                    <input class="btn btn-primary" type="submit" value="Verifier"/>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="alert alert-success" ng-show="dictee.question.correct">BRAVO !</div>
+        <div class="alert alert-danger" ng-hide="dictee.question.correct || !dictee.total">Faux</div>
+    </form>
+</div>
