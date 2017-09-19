@@ -15,10 +15,13 @@
         this.question = question;
         this.points = 0;
         this.total = 0;
+        this.finished = false;
 
         this.restart = function() {
             this.total = 0;
             this.points = 0;
+            this.nextWord();
+            this.finished = false;
         };
 
         this.checkAnswer = function() {
@@ -29,15 +32,20 @@
 
             //this.question.answer = this.question.word.toUpperCase() + " " + this.question.answer.toUpperCase();
             this.question.correct = this.question.word.toUpperCase() === this.question.answer.toUpperCase();
-            if (this.question.correct) {
-                this.points += 1;
-                this.nextWord();
-            }
-            else {
-                this.readWord();
-            }
 
             this.total += 1;
+            this.finished = this.total === 10;
+
+            if (this.question.correct) {
+                this.points += 1;
+                if(!this.finished)
+                    this.nextWord();
+            }
+            else {
+                if(!this.finished)
+                    this.readWord();
+            }
+
         };
 
         this.readWord = function() {

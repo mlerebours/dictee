@@ -6,16 +6,23 @@
     var app = angular.module('myApp', [
         'ngRoute',
         'myApp.dictee',
-        'myApp.dictee2',
+        'myApp.home',
         'myApp.view1',
         'myApp.view2',
         'myApp.version'
     ]);
 
+
+    app.controller('activeMenuController', function($scope) {
+        $scope.getClass = function (path) {
+            return ($location.path().substr(0, path.length) === path) ? 'active' : '';
+        };
+    });
+
     app.config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
         $locationProvider.hashPrefix('!');
 
-        $routeProvider.otherwise({redirectTo: '/dictee'});
+        $routeProvider.otherwise({redirectTo: '/home'});
     }]);
 
 })();
