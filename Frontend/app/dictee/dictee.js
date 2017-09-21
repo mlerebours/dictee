@@ -95,7 +95,7 @@
         'aquarium',
         'douane',
         'zouave',
-        'poêlle'
+        'poêle'
     ]
 
 })();
